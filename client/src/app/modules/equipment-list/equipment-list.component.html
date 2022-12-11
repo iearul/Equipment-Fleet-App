@@ -1,0 +1,48 @@
+<!-- <p>{{ equipmentList | json }}</p> -->
+<div class="d-flex flex-row justify-content-end my-2">
+  <button (click)="addEquipment()" class="btn btn-primary">
+    Add Equipment
+  </button>
+</div>
+<div>
+  <h3>Equipment List</h3>
+  <span>Click on Name, Type or Construction Year title to sort the data.</span>
+</div>
+<div class="d-flex flex-row justify-content-start my-2 w-25">
+  <input [formControl]="searchField" type="text" class="form-control" placeholder="Seach by Name/Type" />
+</div>
+<div *ngIf="equipmentList.length > 0">
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mb-0" id="datatable">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+          <th class="border-top-0" scope="col" sortable="type" (sort)="onSort($event)">Type</th>
+          <th class="border-top-0" scope="col">Construction Number</th>
+          <th class="border-top-0" scope="col" sortable="construction_year" (sort)="onSort($event)">Construction Year
+          </th>
+          <th class="border-top-0" scope="col" style="width: 120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of equipmentList" [class.active]="item === selectedNote">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.type }}</td>
+          <td>{{ item.construction_number }}</td>
+          <td>{{ item.construction_year }}</td>
+          <td style="white-space: nowrap">
+            <button (click)="onDetailView(item.id)" class="btn btn-secondary">
+              Details</button>&nbsp;
+            <button (click)="deleteEquipment(item.id)" class="btn btn-danger">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ngb-pagination [collectionSize]="total" [(page)]="page" (pageChange)="changePage($event)"
+      aria-label="Default pagination"></ngb-pagination>
+  </div>
+</div>

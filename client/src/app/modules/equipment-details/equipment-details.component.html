@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body" *ngIf="equipment">
+      <ng-container *ngIf="isEdit; else viewDetails">
+        <app-equipment-form [eqpForm]="eqpForm"></app-equipment-form>
+        <button class="btn btn-primary btn-rounded" (click)="onFormSubmit()">
+          Update
+        </button>
+      </ng-container>
+      <ng-template #viewDetails>
+        <h4 class="box-title mt-5">Product description</h4>
+        <div class="container border p-4">
+          <div class="wrapper row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+              <table class="table">
+                <tbody class="text-start">
+                  <tr>
+                    <th>Name:</th>
+                    <td>{{ equipment.name }}</td>
+                  </tr>
+                  <tr>
+                    <th>Type:</th>
+                    <td>{{ equipment.type }}</td>
+                  </tr>
+                  <tr>
+                    <th>Construction Number:</th>
+                    <td>{{ equipment.construction_number }}</td>
+                  </tr>
+                  <tr>
+                    <th>Construction Year:</th>
+                    <td> {{ equipment.construction_year }}</td>
+                  </tr>
+                  <tr>
+                    <th>Description:</th>
+                    <td> {{ equipment.description }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="action">
+                <button type="button" class="btn btn-primary" (click)="onEditEqp()">
+                  Edit
+                </button>
+              </div>
+            </div>
+            <div class="preview col-md-4">
+              <div class="preview-pic tab-content">
+                <div class="tab-pane active" id="pic-1">
+                  <img src="{{
+                      equipment.image ??
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo9mLQPhp08Nml8xkadS3KKKalEV70lDV55A&usqp=CAU'
+                    }}" height="250" width="220" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

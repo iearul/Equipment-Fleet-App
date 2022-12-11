@@ -1,0 +1,10 @@
+#Client 
+/client/node_modules/
+/client/dist/
+/client/.angular/
+
+#API
+/api/.idea/
+/api/vendor/
+/api/web/uploads/
+
